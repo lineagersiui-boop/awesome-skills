@@ -90,7 +90,7 @@ Fetch the input schema:
     apify actors info "lineagersiui/sitemap-url-health-checker" --input \
       --user-agent apify-awesome-skills/apify-sitemap-health-check 2>/dev/null
 
-Fetch the results (the dataset ID is in the run output):
+Fetch the results (the dataset ID is `storage.defaultDatasetId` in the call's JSON output):
 
     apify datasets get-items DATASET_ID --format json \
       --user-agent apify-awesome-skills/apify-sitemap-health-check 2>/dev/null
@@ -107,7 +107,7 @@ Hosted MCP server at <https://mcp.apify.com>. Documented at
 
 ## Troubleshooting
 
-- **Run refused, or only the demo ran:** `confirmPermission` is missing or `false`, or no site/sitemap was given. Ask the user to confirm permission, then set it to `true`.
+- **Run refused (the call exits non-zero and the run status is FAILED), or only the demo ran:** `confirmPermission` is missing or `false`, or no site/sitemap was given. Nothing is checked or charged. Ask the user to confirm permission, then set it to `true`.
 - **0 URLs found:** the site has no sitemap in robots.txt or at `/sitemap.xml`. Ask for the direct sitemap URL and pass it in `sitemapUrls`.
 - **Many `blocked_by_robots` rows:** the site's robots.txt disallows these URLs for this checker. The Actor respects that, and they aren't billed.
 - **Run stopped early:** `maxUrls` or `timeLimitSecs` was reached. Unchecked URLs aren't billed. Raise the limits or split the sitemap.
